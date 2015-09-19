@@ -3,6 +3,8 @@ package chatwork4go
 import (
 	"net/http"
 	"bytes"
+	"time"
+	"github.com/codegangsta/cli"
 )
 
 type Client struct {
@@ -21,7 +23,6 @@ func NewClient(key string) *Client {
 	return client;
 }
 
-
 func (client *Client) getMyStatus() {
 	var buf io.ReadWriter
 	buf = new(bytes.Buffer)
@@ -30,5 +31,6 @@ func (client *Client) getMyStatus() {
 
 	}
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
-	req.
+	hclient := &http.Client{Timeout: time.Duration(10 * time.Second)}
+	hclient.Do(req)
 }
