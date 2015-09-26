@@ -5,3 +5,8 @@ type Client struct {
 }
 
 type APIKEY string
+
+func NewClient() *Client {
+	client := new (Client);
+	return client;
+}
