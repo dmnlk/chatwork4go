@@ -1,7 +1,8 @@
 package main
-
-import "fmt"
+import (
+	"github.com/dmnlk/chatwork4go"
+)
 
 func main() {
-	fmt.Printf("Hello world!")
+	client := chatwork4go.NewClient("");
 }

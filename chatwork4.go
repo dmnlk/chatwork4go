@@ -6,7 +6,8 @@ type Client struct {
 
 type APIKEY string
 
-func NewClient() *Client {
+func NewClient(key string) *Client {
 	client := new (Client);
+	client.apikey = key;
 	return client;
 }
