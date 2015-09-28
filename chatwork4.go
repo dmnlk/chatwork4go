@@ -6,6 +6,10 @@ type Client struct {
 
 type APIKEY string
 
+const (
+	END_POINT_URL string = "https://api.chatwork.com/v1"
+)
+
 func NewClient(key string) *Client {
 	client := new (Client);
 	client.apikey = key;
