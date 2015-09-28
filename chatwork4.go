@@ -1,5 +1,10 @@
 package chatwork4go
 
+import (
+	"net/http"
+	"bytes"
+)
+
 type Client struct {
 	apikey APIKEY
 }
@@ -17,6 +22,13 @@ func NewClient(key string) *Client {
 }
 
 
-func (client *Client) PostToRoom(roomId string, postMessage string) {
+func (client *Client) getMyStatus() {
+	var buf io.ReadWriter
+	buf = new(bytes.Buffer)
+	req, err := http.NewRequest("GET", "", buf)
+	if err != nil {
 
+	}
+	req.Header.Add("X-ChatWorkToken", string(client.apikey))
+	req.
 }
