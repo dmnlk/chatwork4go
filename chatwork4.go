@@ -11,3 +11,8 @@ func NewClient(key string) *Client {
 	client.apikey = key;
 	return client;
 }
+
+
+func (client *Client) PostToRoom(roomId string, postMessage string) {
+
+}
