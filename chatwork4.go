@@ -1,10 +1,15 @@
 package chatwork4go
 
 import (
-	"net/http"
 	"bytes"
+	"fmt"
+	"io"
+	"net/http"
 	"time"
-	"github.com/codegangsta/cli"
+)
+
+const (
+	END_POINT_URL string = "https://api.chatwork.com/v1"
 )
 
 type Client struct {
@@ -13,19 +18,16 @@ type Client struct {
 
 type APIKEY string
 
-const (
-	END_POINT_URL string = "https://api.chatwork.com/v1"
-)
-
 func NewClient(key string) *Client {
-	client := new (Client);
-	client.apikey = key;
-	return client;
+	client := new(Client)
+	client.apikey = APIKEY(key)
+	return client
 }
 
-func (client *Client) getMyStatus() {
+func (client *Client) GetMyStatus() {
 	var buf io.ReadWriter
 	buf = new(bytes.Buffer)
+	fmt.Print("a")
 	req, err := http.NewRequest("GET", "", buf)
 	if err != nil {
 
