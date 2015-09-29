@@ -4,6 +4,6 @@ import (
 )
 
 func main() {
-	client := chatwork4go.NewClient("");
-
+	client := chatwork4go.NewClient("a");
+	client.GetMyStatus()
 }
