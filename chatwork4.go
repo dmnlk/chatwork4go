@@ -52,6 +52,6 @@ func (client *Client) GetMyStatus() {
 		fmt.Errorf("err")
 	}
 
-	pp.Println(val)
+	pp.Println(string(val))
 	fmt.Println("api call end")
 }
