@@ -27,7 +27,6 @@ func NewClient(key string) *Client {
 }
 
 func (client *Client) GetMyStatus() {
-	fmt.Println("api call start")
 	var buf io.ReadWriter
 	buf = new(bytes.Buffer)
 	req, err := http.NewRequest("GET", END_POINT_URL+"/my/status ", buf)
@@ -53,5 +52,4 @@ func (client *Client) GetMyStatus() {
 	}
 
 	pp.Println(string(val))
-	fmt.Println("api call end")
 }
