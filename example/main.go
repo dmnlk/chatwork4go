@@ -1,9 +1,14 @@
 package main
+
 import (
+	"os"
+
 	"github.com/dmnlk/chatwork4go"
 )
 
 func main() {
-	client := chatwork4go.NewClient("a");
+	var apikey = os.Args[1]
+
+	client := chatwork4go.NewClient(apikey)
 	client.GetMyStatus()
 }
