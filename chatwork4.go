@@ -40,7 +40,7 @@ func (client *Client) GetMyStatus() {
 	if err != nil {
 		fmt.Errorf("err")
 	}
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		fmt.Errorf(resp.Status)
 	}
 	defer resp.Body.Close()
