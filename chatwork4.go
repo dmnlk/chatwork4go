@@ -8,6 +8,7 @@ import (
 	"time"
 	"github.com/k0kubun/pp"
 	"io/ioutil"
+	"encoding/json"
 )
 
 const (
@@ -51,5 +52,8 @@ func (client *Client) GetMyStatus() {
 		fmt.Errorf("err")
 	}
 
-	pp.Println(string(val))
+	var res Status
+	json.Unmarshal(val, &res)
+
+	pp.Println(res)
 }

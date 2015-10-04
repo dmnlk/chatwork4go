@@ -1,12 +1,10 @@
 package chatwork4go
 
 type Status struct {
-	AccountID        int    `json:"account_id"`
-	AvatarImageURL   string `json:"avatar_image_url"`
-	ChatworkID       string `json:"chatwork_id"`
-	Department       string `json:"department"`
-	Name             string `json:"name"`
-	OrganizationID   int    `json:"organization_id"`
-	OrganizationName string `json:"organization_name"`
-	RoomID           int    `json:"room_id"`
+	MentionNum     int `json:"mention_num"`
+	MentionRoomNum int `json:"mention_room_num"`
+	MytaskNum      int `json:"mytask_num"`
+	MytaskRoomNum  int `json:"mytask_room_num"`
+	UnreadNum      int `json:"unread_num"`
+	UnreadRoomNum  int `json:"unread_room_num"`
 }
