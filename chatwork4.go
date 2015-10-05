@@ -53,7 +53,10 @@ func (client *Client) GetMyStatus() {
 	}
 
 	var res Status
-	json.Unmarshal(val, &res)
+	err = json.Unmarshal(val, &res)
+	if err != nil {
+		fmt.Errorf("json err")
+	}
 
 	pp.Println(res)
 }
