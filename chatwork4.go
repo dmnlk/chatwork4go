@@ -2,14 +2,14 @@ package chatwork4go
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"time"
+
 	"github.com/k0kubun/pp"
-	"io/ioutil"
-	"encoding/json"
-	"golang.org/x/tools/dashboard/retrybuilds"
 )
 
 const (
@@ -38,7 +38,7 @@ func (client *Client) GetMyStatus() (*Status, error) {
 	}
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 	hclient := &http.Client{Timeout: time.Duration(10 * time.Second)}
-	resp, err :=hclient.Do(req)
+	resp, err := hclient.Do(req)
 	if err != nil {
 		fmt.Errorf("err")
 		return nil, err
