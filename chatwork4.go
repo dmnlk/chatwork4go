@@ -8,8 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
-
-	"github.com/k0kubun/pp"
 )
 
 const (
