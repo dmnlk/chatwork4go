@@ -4,11 +4,11 @@ import (
 	"os"
 
 	"github.com/dmnlk/chatwork4go"
+	"github.com/k0kubun/pp"
 )
 
 func main() {
 	var apikey = os.Args[1]
-
 	client := chatwork4go.NewClient(apikey)
-	client.GetMyStatus()
+	pp.Println(client.GetMyStatus())
 }

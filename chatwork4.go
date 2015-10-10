@@ -31,7 +31,7 @@ func NewClient(key string) *Client {
 func (client *Client) GetMyStatus() (*Status, error) {
 	var buf io.ReadWriter
 	buf = new(bytes.Buffer)
-	req, err := http.NewRequest("GET", END_POINT_URL+"/my/status ", buf)
+	req, err := http.NewRequest("GET", END_POINT_URL+"/my/status", buf)
 	if err != nil {
 		fmt.Errorf("occur error")
 		return nil, err
@@ -55,13 +55,11 @@ func (client *Client) GetMyStatus() (*Status, error) {
 		return nil, err
 	}
 
-	var res Status
+	var res *Status
 	err = json.Unmarshal(val, &res)
 	if err != nil {
 		fmt.Errorf("json err")
 		return nil, err
 	}
-
-	pp.Println(res)
-	return *res, nil
+	return res, nil
 }
