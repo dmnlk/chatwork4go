@@ -82,16 +82,9 @@ func (client *Client) GetMyTasks() {
 	}
 	defer resp.Body.Close()
 
-	val, err := ioutil.ReadAll(resp.Body)
+	_, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Errorf("err")
-
-	}
-
-	var res *Status
-	err = json.Unmarshal(val, &res)
-	if err != nil {
-		fmt.Errorf("json err")
 
 	}
 
