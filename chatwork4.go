@@ -61,3 +61,38 @@ func (client *Client) GetMyStatus() (*Status, error) {
 	}
 	return res, nil
 }
+
+func (client *Client) GetMyTasks() {
+	var buf io.ReadWriter
+	buf = new(bytes.Buffer)
+	req, err := http.NewRequest("GET", END_POINT_URL+"/my/tasks", buf)
+	if err != nil {
+		fmt.Errorf("occur error")
+	}
+	req.Header.Add("X-ChatWorkToken", string(client.apikey))
+	hclient := &http.Client{Timeout: time.Duration(10 * time.Second)}
+	resp, err := hclient.Do(req)
+	if err != nil {
+		fmt.Errorf("err")
+
+	}
+	if resp.StatusCode != http.StatusOK {
+		fmt.Errorf(resp.Status)
+
+	}
+	defer resp.Body.Close()
+
+	val, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Errorf("err")
+
+	}
+
+	var res *Status
+	err = json.Unmarshal(val, &res)
+	if err != nil {
+		fmt.Errorf("json err")
+
+	}
+
+}
