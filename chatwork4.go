@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"github.com/k0kubun/pp"
 )
 
 const (
@@ -82,10 +83,17 @@ func (client *Client) GetMyTasks() {
 	}
 	defer resp.Body.Close()
 
-	_, err := ioutil.ReadAll(resp.Body)
+	val, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Errorf("err")
-
 	}
+
+	var res *Task
+	err = json.Unmarshal(val, &res)
+	if err != nil {
+		fmt.Errorf("error")
+	}
+
+	pp.Println(res)
 
 }
