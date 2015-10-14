@@ -94,6 +94,6 @@ func (client *Client) GetMyTasks() {
 		fmt.Errorf("error")
 	}
 
-	pp.Println(res)
+	pp.Println(res.AssignedByAccount)
 
 }

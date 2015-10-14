@@ -11,4 +11,5 @@ func main() {
 	var apikey = os.Args[1]
 	client := chatwork4go.NewClient(apikey)
 	pp.Println(client.GetMyStatus())
+	client.GetMyTasks()
 }
