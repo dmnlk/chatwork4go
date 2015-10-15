@@ -8,8 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
-	"github.com/k0kubun/pp"
-	"golang.org/x/tools/dashboard/retrybuilds"
 )
 
 const (
@@ -97,7 +95,6 @@ func (client *Client) GetMyTasks() (*Task, error) {
 		fmt.Errorf("error")
 		return nil, err
 	}
-
 
 	return res, nil
 }
