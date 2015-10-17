@@ -16,6 +16,7 @@ const (
 
 type Client struct {
 	apikey APIKEY
+	client http.Client
 }
 
 type APIKEY string
@@ -23,6 +24,7 @@ type APIKEY string
 func NewClient(key string) *Client {
 	client := new(Client)
 	client.apikey = APIKEY(key)
+	client.client = http.DefaultClient
 	return client
 }
 
