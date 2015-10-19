@@ -100,3 +100,7 @@ func (client *Client) GetMyTasks() (*Task, error) {
 
 	return res, nil
 }
+
+func (client *Client) PostMesseage(roomId int, message string) {
+	
+}
