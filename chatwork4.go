@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"golang.org/x/tools/dashboard/retrybuilds"
 )
 
 const (
@@ -21,11 +22,17 @@ type Client struct {
 
 type APIKEY string
 
-func NewClient(key string) *Client {
+func NewClient(key string) (*Client, error) {
 	client := new(Client)
 	client.apikey = APIKEY(key)
 	client.client = http.DefaultClient
-	return client
+	// check apikey
+	_, err := client.GetMyStatus()
+	if err != nil {
+		return nil, err
+	}
+
+	return client, nil
 }
 
 func (client *Client) GetMyStatus() (*Status, error) {
