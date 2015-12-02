@@ -102,5 +102,5 @@ func (client *Client) GetMyTasks() (*Task, error) {
 }
 
 func (client *Client) PostMesseage(roomId int, message string) {
-	
+
 }
