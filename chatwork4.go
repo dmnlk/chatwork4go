@@ -24,7 +24,6 @@ type APIKEY string
 func NewClient(key string) (*Client, error) {
 	client := new(Client)
 	client.apikey = APIKEY(key)
-	//client.client = http.DefaultClient
 	client.client = &http.Client{Timeout: time.Duration(10 * time.Second)}
 	// check apikey
 	_, err := client.GetMyStatus()
@@ -44,7 +43,7 @@ func (client *Client) GetMyStatus() (*Status, error) {
 		return nil, err
 	}
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
-	//hclient := &http.Client{Timeout: time.Duration(10 * time.Second)}
+
 	resp, err := client.client.Do(req)
 	if err != nil {
 		fmt.Errorf("err")
@@ -80,7 +79,7 @@ func (client *Client) GetMyTasks() (*Task, error) {
 		return nil, err
 	}
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
-	//hclient := &http.Client{Timeout: time.Duration(10 * time.Second)}
+
 	resp, err := client.client.Do(req)
 	if err != nil {
 		fmt.Errorf("err")
