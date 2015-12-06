@@ -7,7 +7,9 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"time"
+	"strings"
 )
 
 const (
@@ -107,6 +109,26 @@ func (client *Client) GetMyTasks() (*Task, error) {
 	return res, nil
 }
 
-func (client *Client) PostMesseage(roomId int, message string) {
+func (client *Client) PostMesseages(roomId int, message string)(error) {
+	var buf io.ReadWriter
+	data := url.Values{"foo": {"bar"}}
+	req, err := http.NewRequest("POST", END_POINT_URL+"/message", strings.NewReader(data.Encode()),)
+	if err != nil {
+		fmt.Errorf("occur error")
+		return err
+	}
+	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 
+	resp, err := client.client.Do(req)
+	if err != nil {
+		fmt.Errorf("err")
+		return err
+	}
+	if resp.StatusCode != http.StatusOK {
+		fmt.Errorf(resp.Status)
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
 }
