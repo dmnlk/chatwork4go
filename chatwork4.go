@@ -8,8 +8,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"time"
 	"strings"
+	"time"
 )
 
 const (
@@ -109,9 +109,9 @@ func (client *Client) GetMyTasks() (*Task, error) {
 	return res, nil
 }
 
-func (client *Client) PostMesseages(roomId int, message string)(error) {
+func (client *Client) PostMesseages(roomId int, message string) error {
 	data := url.Values{"foo": {"bar"}}
-	req, err := http.NewRequest("POST", END_POINT_URL+string(roomId)+"/message", strings.NewReader(data.Encode()),)
+	req, err := http.NewRequest("POST", END_POINT_URL+string(roomId)+"/message", strings.NewReader(data.Encode()))
 	if err != nil {
 		fmt.Errorf("occur error")
 		return err
