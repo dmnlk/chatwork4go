@@ -110,7 +110,6 @@ func (client *Client) GetMyTasks() (*Task, error) {
 }
 
 func (client *Client) PostMesseages(roomId int, message string)(error) {
-	var buf io.ReadWriter
 	data := url.Values{"foo": {"bar"}}
 	req, err := http.NewRequest("POST", END_POINT_URL+string(roomId)+"/message", strings.NewReader(data.Encode()),)
 	if err != nil {
