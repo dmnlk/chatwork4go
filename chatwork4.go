@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 	"strconv"
+	"github.com/k0kubun/pp"
 )
 
 const (
@@ -112,9 +113,7 @@ func (client *Client) GetMyTasks() (*Task, error) {
 
 func (client *Client) PostMesseages(roomId int, message string) error {
 	data := url.Values{"body": {message}}
-
 	req, err := http.NewRequest("POST", END_POINT_URL+"/rooms/"+strconv.Itoa(roomId)+"/messages", strings.NewReader(data.Encode()))
-	fmt.Println(req.URL)
 	if err != nil {
 		fmt.Errorf("occur error")
 		return err
