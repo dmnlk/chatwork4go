@@ -8,10 +8,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
-	"github.com/k0kubun/pp"
 )
 
 const (
@@ -43,32 +42,27 @@ func (client *Client) GetMyStatus() (*Status, error) {
 	buf = new(bytes.Buffer)
 	req, err := http.NewRequest("GET", END_POINT_URL+"/my/status", buf)
 	if err != nil {
-		fmt.Errorf("occur error")
 		return nil, err
 	}
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 
 	resp, err := client.client.Do(req)
 	if err != nil {
-		fmt.Errorf("err")
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		fmt.Errorf(resp.Status)
 		return nil, err
 	}
 	defer resp.Body.Close()
 
 	val, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Errorf("err")
 		return nil, err
 	}
 
 	var res *Status
 	err = json.Unmarshal(val, &res)
 	if err != nil {
-		fmt.Errorf("json err")
 		return nil, err
 	}
 	return res, nil
@@ -79,32 +73,27 @@ func (client *Client) GetMyTasks() (*Task, error) {
 	buf = new(bytes.Buffer)
 	req, err := http.NewRequest("GET", END_POINT_URL+"/my/tasks", buf)
 	if err != nil {
-		fmt.Errorf("occur error")
 		return nil, err
 	}
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 
 	resp, err := client.client.Do(req)
 	if err != nil {
-		fmt.Errorf("err")
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		fmt.Errorf(resp.Status)
 		return nil, err
 	}
 	defer resp.Body.Close()
 
 	val, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Errorf("err")
 		return nil, err
 	}
 
 	var res *Task
 	err = json.Unmarshal(val, &res)
 	if err != nil {
-		fmt.Errorf("error")
 		return nil, err
 	}
 
@@ -115,20 +104,18 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 	data := url.Values{"body": {message}}
 	req, err := http.NewRequest("POST", END_POINT_URL+"/rooms/"+strconv.Itoa(roomId)+"/messages", strings.NewReader(data.Encode()))
 	if err != nil {
-		fmt.Errorf("occur error")
 		return err
 	}
+
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 
 	resp, err := client.client.Do(req)
 	if err != nil {
-		fmt.Errorf("err")
 		return err
 	}
 
 	fmt.Print(resp.StatusCode)
 	if resp.StatusCode != http.StatusOK {
-		fmt.Errorf(resp.Status)
 		return err
 	}
 	defer resp.Body.Close()
