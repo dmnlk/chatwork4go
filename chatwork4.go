@@ -118,10 +118,11 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 	if err != nil {
 		return err
 	}
-	pp.Println(req)
+
 
 	if resp.StatusCode != http.StatusOK {
-		return errors.New("status code is not ok :" + strconv.Itoa(resp.StatusCode))
+		body, _ := ioutil.ReadAll(resp.Body)
+		return errors.New((string(body)))
 	}
 	defer resp.Body.Close()
 
