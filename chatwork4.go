@@ -12,6 +12,8 @@ import (
 
 	"errors"
 
+	"strings"
+
 	"github.com/k0kubun/pp"
 )
 
@@ -104,13 +106,13 @@ func (client *Client) GetMyTasks() (*Task, error) {
 }
 
 func (client *Client) PostMesseages(roomId int, message string) error {
-	//data := url.Values{"body": {message}}
 	data := url.Values{}
 	data.Set("body", message)
-	req, err := http.NewRequest("POST", END_POINT_URL+"/rooms/"+strconv.Itoa(roomId)+"/messages", bytes.NewBufferString(data.Encode()))
+	req, err := http.NewRequest("POST", END_POINT_URL+"/rooms/"+strconv.Itoa(roomId)+"/messages", strings.NewReader(data.Encode()))
 	if err != nil {
 		return err
 	}
+	pp.Println(req)
 
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 
@@ -118,7 +120,6 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 	if err != nil {
 		return err
 	}
-
 
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
