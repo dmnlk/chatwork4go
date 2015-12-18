@@ -114,7 +114,6 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 		return err
 	}
 
-	fmt.Print(resp.StatusCode)
 	if resp.StatusCode != http.StatusOK {
 		return err
 	}
