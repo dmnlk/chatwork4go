@@ -9,11 +9,12 @@ import (
 
 func main() {
 	var apikey = os.Args[1]
-	client, _ := chatwork4go.NewClient(apikey)
-//	pp.Println(client.GetMyStatus())
-//	pp.Println(client.GetMyTasks())
+	client, err := chatwork4go.NewClient(apikey)
+	if err != nil {
+		pp.Println(err)
+	}
 	// post sample
-	err := client.PostMesseages(41380405, "aaa")
+	err = client.PostMesseages(41380405, "aaa")
 	if err != nil {
 		pp.Println(err)
 	}
