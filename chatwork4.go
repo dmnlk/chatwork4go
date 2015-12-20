@@ -8,8 +8,11 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-	"strings"
 	"time"
+
+	"errors"
+
+	"github.com/k0kubun/pp"
 )
 
 const (
@@ -28,7 +31,8 @@ func NewClient(key string) (*Client, error) {
 	client.apikey = APIKEY(key)
 	client.client = &http.Client{Timeout: time.Duration(10 * time.Second)}
 	// check apikey
-	_, err := client.GetMyStatus()
+	st, err := client.GetMyStatus()
+	pp.Println(st)
 	if err != nil {
 		return nil, err
 	}
@@ -100,8 +104,10 @@ func (client *Client) GetMyTasks() (*Task, error) {
 }
 
 func (client *Client) PostMesseages(roomId int, message string) error {
-	data := url.Values{"body": {message}}
-	req, err := http.NewRequest("POST", END_POINT_URL+"/rooms/"+strconv.Itoa(roomId)+"/messages", strings.NewReader(data.Encode()))
+	//data := url.Values{"body": {message}}
+	data := url.Values{}
+	data.Set("body", message)
+	req, err := http.NewRequest("POST", END_POINT_URL+"/rooms/"+strconv.Itoa(roomId)+"/messages", bytes.NewBufferString(data.Encode()))
 	if err != nil {
 		return err
 	}
@@ -112,9 +118,10 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 	if err != nil {
 		return err
 	}
+	pp.Println(req)
 
 	if resp.StatusCode != http.StatusOK {
-		return err
+		return errors.New("status code is not ok :" + strconv.Itoa(resp.StatusCode))
 	}
 	defer resp.Body.Close()
 
