@@ -86,7 +86,8 @@ func (client *Client) GetMyTasks() (*Task, error) {
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, err
+		body, _ := ioutil.ReadAll(resp.Body)
+		return nil,  errors.New((string(body)))
 	}
 	defer resp.Body.Close()
 
