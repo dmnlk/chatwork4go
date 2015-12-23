@@ -111,8 +111,6 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 	if err != nil {
 		return err
 	}
-	pp.Println(req)
-
 	req.Header.Add("X-ChatWorkToken", string(client.apikey))
 
 	resp, err := client.client.Do(req)
