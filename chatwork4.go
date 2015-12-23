@@ -33,8 +33,7 @@ func NewClient(key string) (*Client, error) {
 	client.apikey = APIKEY(key)
 	client.client = &http.Client{Timeout: time.Duration(10 * time.Second)}
 	// check apikey
-	st, err := client.GetMyStatus()
-	pp.Println(st)
+	_, err := client.GetMyStatus()
 	if err != nil {
 		return nil, err
 	}
