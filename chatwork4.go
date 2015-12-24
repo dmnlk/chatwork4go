@@ -56,7 +56,7 @@ func (client *Client) GetMyStatus() (*Status, error) {
 	}
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
-		return errors.New((string(body)))
+		return nil, errors.New((string(body)))
 	}
 	defer resp.Body.Close()
 
