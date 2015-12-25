@@ -13,8 +13,6 @@ import (
 	"errors"
 
 	"strings"
-
-	"github.com/k0kubun/pp"
 )
 
 const (
@@ -88,7 +86,7 @@ func (client *Client) GetMyTasks() (*Task, error) {
 	}
 	if resp.StatusCode != http.StatusOK {
 		body, _ := ioutil.ReadAll(resp.Body)
-		return nil,  errors.New((string(body)))
+		return nil, errors.New((string(body)))
 	}
 	defer resp.Body.Close()
 
