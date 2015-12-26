@@ -126,3 +126,7 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 
 	return nil
 }
+
+func (client *Client) execute() {
+	
+}
