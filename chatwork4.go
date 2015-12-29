@@ -127,6 +127,24 @@ func (client *Client) PostMesseages(roomId int, message string) error {
 	return nil
 }
 
-func (client *Client) execute(httpMethod string, endpoint string) {
+func (client *Client) execute(httpMethod string, endpoint string) error {
+	req, err := http.NewRequest(httpMethod, endpoint, nil)
+	if err != nil {
+		return err
+	}
 
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Add("X-ChatWorkToken", string(client.apikey))
+	resp, err := client.client.Do(req)
+	if err != nil {
+		return err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := ioutil.ReadAll(resp.Body)
+		return errors.New((string(body)))
+	}
+	defer resp.Body.Close()
+
+	return nil
 }
