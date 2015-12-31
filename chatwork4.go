@@ -68,6 +68,8 @@ func (client *Client) GetMyStatus() (*Status, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	client.execute("GET",  END_POINT_URL+"/my/status")
 	return res, nil
 }
 
