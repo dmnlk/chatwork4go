@@ -13,6 +13,7 @@ import (
 	"errors"
 
 	"strings"
+	"fmt"
 )
 
 const (
@@ -31,34 +32,17 @@ func NewClient(key string) (*Client, error) {
 	client.apikey = APIKEY(key)
 	client.client = &http.Client{Timeout: time.Duration(10 * time.Second)}
 	// check apikey
-	_, err := client.GetMyStatus()
+	status, err := client.GetMyStatus()
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println(status)
 
 	return client, nil
 }
 
 func (client *Client) GetMyStatus() (*Status, error) {
-	var buf io.ReadWriter
-	buf = new(bytes.Buffer)
-	req, err := http.NewRequest("GET", END_POINT_URL+"/my/status", buf)
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("X-ChatWorkToken", string(client.apikey))
-
-	resp, err := client.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	if resp.StatusCode != http.StatusOK {
-		body, _ := ioutil.ReadAll(resp.Body)
-		return nil, errors.New((string(body)))
-	}
-	defer resp.Body.Close()
-
-	val, err := ioutil.ReadAll(resp.Body)
+	val, err := client.execute("GET",  END_POINT_URL+"/my/status")
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +53,6 @@ func (client *Client) GetMyStatus() (*Status, error) {
 		return nil, err
 	}
 
-	client.execute("GET",  END_POINT_URL+"/my/status")
 	return res, nil
 }
 
