@@ -9,13 +9,13 @@ import (
 
 func main() {
 	var apikey = os.Args[1]
-	client, err := chatwork4go.NewClient(apikey)
+	_, err := chatwork4go.NewClient(apikey)
 	if err != nil {
 		pp.Println(err)
 	}
 	// post sample
-	err = client.PostMesseages(41380405, "aaa")
-	if err != nil {
-		pp.Println(err)
-	}
+//	err = client.PostMesseages(41380405, "aaa")
+//	if err != nil {
+//		pp.Println(err)
+//	}
 }
